@@ -4,25 +4,27 @@ import { getproduct } from "../../data/products.js";
 import { format_currency } from "../utils/money.js";
 
 export function renderpaymentsummary() {
-    let totalprice = 0;
-    let shippingcost = 0;
-    cart.forEach((cartitem) => {
-        const product = getproduct(cartitem.productid);
-        totalprice += product.price * cartitem.quantity;
-        const deliveryOption = getdeliveryoption(cartitem.deliveryOptionID);
-        shippingcost += deliveryOption.delivery_cost;
-    });
-    const totalbeforetax = shippingcost + totalprice;
-    const tax = totalbeforetax * 0.1;
-    const aftertax = totalbeforetax + tax;
+  let totalprice = 0;
+  let shippingcost = 0;
+  let items = 0;
+  cart.forEach((cartitem) => {
+    const product = getproduct(cartitem.productid);
+    totalprice += product.price * cartitem.quantity;
+    const deliveryOption = getdeliveryoption(cartitem.deliveryOptionID);
+    shippingcost += deliveryOption.delivery_cost;
+    items += cartitem.quantity;
+  });
+  const totalbeforetax = shippingcost + totalprice;
+  const tax = totalbeforetax * 0.1;
+  const aftertax = totalbeforetax + tax;
 
-    const paymentsSummaryhtml = `
+  const paymentsSummaryhtml = `
     <div class="payment-summary-title">
           Order Summary
         </div>
 
         <div class="payment-summary-row">
-          <div>Items (3):</div>
+          <div>Items (${items}):</div>
           <div class="payment-summary-money">$${format_currency(totalprice)}</div>
         </div>
 
@@ -50,5 +52,6 @@ export function renderpaymentsummary() {
           Place your order
         </button>
     `;
-    document.querySelector('.js-payment-summary').innerHTML = paymentsSummaryhtml;
+  document.querySelector('.js-payment-summary').innerHTML = paymentsSummaryhtml;
+  document.querySelector('.js-middle-section').innerHTML = `${items} - items`;
 }

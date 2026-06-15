@@ -10,7 +10,7 @@ function save_to_storage() {
 //adding to the cart
 
 // function for adding the item to the cart
-export function add_to_cart(pro_id) {
+export function add_to_cart(pro_id ,val) {
     let matching;
 
     cart.forEach((item) => {
@@ -20,13 +20,13 @@ export function add_to_cart(pro_id) {
     });
 
     if (matching) {
-        matching.quantity++;
+        matching.quantity+=val;
     }
 
     else {
         cart.push({
             productid: pro_id,
-            quantity: 1,
+            quantity: val,
             deliveryOptionID: '1'
         });
     }

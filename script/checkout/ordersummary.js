@@ -66,10 +66,10 @@ export function renderordersummary() {
     link.addEventListener('click', () => {
       const pid = link.dataset.product_id;
 
-
       const container = document.querySelector(`.js-cart-item-container-${pid}`);
       container.remove();
       remove_from_cart(pid);
+      renderpaymentsummary();
     });
   });
 
