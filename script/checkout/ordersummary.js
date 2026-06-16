@@ -21,7 +21,7 @@ export function renderordersummary() {
     const delivery_date = today.add(deliveryOption.delivery_time, 'days');
     const date_string = delivery_date.format('dddd, MMMM D');
 
-    cartsummary_html += `<div class="cart-item-container js-cart-item-container-${matching_Product.id}">
+    cartsummary_html += `<div class="cart-item-container js-item-container js-cart-item-container-${matching_Product.id}">
             <div class="delivery-date">
               Delivery date: ${date_string}
             </div>
@@ -37,14 +37,14 @@ export function renderordersummary() {
                 <div class="product-price">
                   $${format_currency(matching_Product.price)}
                 </div>
-                <div class="product-quantity">
+                <div class="product-quantity js-product-quantity-${matching_Product.id}">
                   <span>
                     Quantity: <span class="quantity-label">${cart_item.quantity}</span>
                   </span>
                   <span class="update-quantity-link link-primary">
                     Update
                   </span>
-                  <span class="delete-quantity-link link-primary js-delete-cartlink" data-product_id="${matching_Product.id}">
+                  <span class="delete-quantity-link link-primary js-delete-cartlink js-delete-link-${matching_Product.id}" data-product_id="${matching_Product.id}">
                     Delete
                   </span>
                 </div>
