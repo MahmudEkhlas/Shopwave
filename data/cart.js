@@ -4,8 +4,7 @@ loadfromstorage();
 
 // loading the cart array
 export function loadfromstorage() {
-    cart = JSON.parse(localStorage.getItem('cart')) ||
-        [];
+    cart = JSON.parse(localStorage.getItem('cart')) || [];
 }
 
 //saving to local storage

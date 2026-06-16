@@ -16,6 +16,7 @@ describe('test suite: add to cart', () => {
             ]);
         });
 
+        loadfromstorage();
 
         add_to_cart('e43638ce-6aa0-4b85-b27f-e1d07eb678c6', 1);
         expect(cart.length).toEqual(1);
