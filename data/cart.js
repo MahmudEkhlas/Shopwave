@@ -1,6 +1,12 @@
 //using Local Storage
-export let cart = JSON.parse(localStorage.getItem('cart')) ||
-    [];
+export let cart;
+loadfromstorage();
+
+// loading the cart array
+export function loadfromstorage() {
+    cart = JSON.parse(localStorage.getItem('cart')) ||
+        [];
+}
 
 //saving to local storage
 function save_to_storage() {
@@ -10,7 +16,7 @@ function save_to_storage() {
 //adding to the cart
 
 // function for adding the item to the cart
-export function add_to_cart(pro_id ,val) {
+export function add_to_cart(pro_id, val) {
     let matching;
 
     cart.forEach((item) => {
@@ -20,7 +26,7 @@ export function add_to_cart(pro_id ,val) {
     });
 
     if (matching) {
-        matching.quantity+=val;
+        matching.quantity += val;
     }
 
     else {

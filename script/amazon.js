@@ -68,7 +68,7 @@ function update_cart() {
   document.querySelector('.js-cart-quantity').innerHTML = total_quantity;
 }
 
-let time_id;
+
 
 document.querySelectorAll('.js-add-to-cart').forEach((button) => {
   button.addEventListener('click', () => {
@@ -83,18 +83,19 @@ document.querySelectorAll('.js-add-to-cart').forEach((button) => {
 
 
 // for  'added' to be visible  on the page after clicking adda to cart button
-
+let time_id={};
 function generateAddedhtml(pro_id) {
+  
   const added_to = document.querySelector(`.js-added-to-cart-${pro_id}`);
 
   added_to.classList.add('added-to-cart-visible');
 
-  if (time_id) {
-    clearTimeout(time_id);
+  if (time_id[pro_id]) {
+    clearTimeout(time_id[pro_id]);
   }
   const timeID = setTimeout(() => {
     added_to.classList.remove('added-to-cart-visible');
   }, 2000);
-  time_id = timeID;
+  time_id[pro_id] = timeID;
 
 }
