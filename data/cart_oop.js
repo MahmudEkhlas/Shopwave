@@ -62,8 +62,6 @@ function Cart_creation(local_key) {
 }
 
 const cart=Cart_creation('cart-oop');
-
-export let cart;
 cart.loadfromstorage();
 
 

@@ -4,6 +4,7 @@ import { format_currency } from "../utils/money.js";
 import dayjs from "https://unpkg.com/supersimpledev@8.5.0/dayjs/esm/index.js";
 import { delivery_option, getdeliveryoption } from "../../data/deliver_option.js";
 import { renderpaymentsummary } from "./paymentsSummary.js";
+import { renderCheckoutHeader } from "./checkHeader.js";
 
 
 export function renderordersummary() {
@@ -66,9 +67,16 @@ export function renderordersummary() {
     link.addEventListener('click', () => {
       const pid = link.dataset.product_id;
 
+      /*
+      after deleting a product from the cart it deleted directly like thecontainer else you can call
+      order summary function directly to update the page
       const container = document.querySelector(`.js-cart-item-container-${pid}`);
-      container.remove();
+      container.remove();*/
+
       remove_from_cart(pid);
+      renderCheckoutHeader();
+      //updating the page after deleting
+      renderordersummary();
       renderpaymentsummary();
     });
   });
