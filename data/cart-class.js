@@ -1,18 +1,18 @@
 class Cart {
     cartItems ;
-    local_key ;
+    #local_key ;
     constructor(localkey) {
-        this.local_key = localkey;
-        this.loadfromstorage();
+        this.#local_key = localkey;
+        this.#loadfromstorage();
     }
 
-    loadfromstorage() {
+    #loadfromstorage() {
         this.cartItems = JSON.parse(localStorage.getItem(this.local_key)) || [];
     }
 
     //saving to local storage
     save_to_storage() {
-        localStorage.setItem(this.local_key, JSON.stringify(this.cartItems));
+        localStorage.setItem(this.#local_key, JSON.stringify(this.cartItems));
     }
 
     // function for adding the item to the cart
