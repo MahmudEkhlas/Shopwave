@@ -1,15 +1,45 @@
-export function getproduct(productID){
+import { format_currency } from "../script/utils/money.js";
+export function getproduct(productID) {
   let matching_Product;
 
-    product.forEach((pro_item) => {
-      if (productID === pro_item.id) {
-        matching_Product = pro_item;
-      }
-    });
-    return matching_Product;
+  product.forEach((pro_item) => {
+    if (productID === pro_item.id) {
+      matching_Product = pro_item;
+    }
+  });
+  return matching_Product;
+}
+
+class Product {
+  id;
+  image;
+  name;
+  rating;
+  price;
+
+  constructor(details) {
+    this.id = details.id;
+    this.image = details.image;
+    this.name = details.name;
+    this.rating = details.rating;
+    this.price = details.price;
+  }
+
+
+  getstars() {
+    return `images/ratings/rating-${this.rating.stars * 10}.png`;
+  }
+
+
+  getprice() {
+    return `$${format_currency(this.price)}`;
+  }
+
+
 }
 
 
+//converting the older cart into the new class based objects of array
 export const product = [
   {
     id: "e43638ce-6aa0-4b85-b27f-e1d07eb678c6",
@@ -669,4 +699,7 @@ export const product = [
       "mens"
     ]
   }
-];
+].map((pro_details) => {
+  return new Product(pro_details);
+});
+
