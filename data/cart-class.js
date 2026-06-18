@@ -7,7 +7,7 @@ class Cart {
     }
 
     #loadfromstorage() {
-        this.cartItems = JSON.parse(localStorage.getItem(this.local_key)) || [];
+        this.cartItems = JSON.parse(localStorage.getItem(this.#local_key)) || [];
     }
 
     //saving to local storage
