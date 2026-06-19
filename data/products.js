@@ -25,7 +25,6 @@ class Product {
     this.price = details.price;
   }
 
-
   getstars() {
     return `images/ratings/rating-${this.rating.stars * 10}.png`;
   }
@@ -35,7 +34,23 @@ class Product {
     return `$${format_currency(this.price)}`;
   }
 
+  extrainfohtml() {
+    return '';
+  }
+}
 
+class Clothing extends Product {
+  sizeChartLink;
+  constructor(prodetail) {
+    super(prodetail);
+    this.sizeChartLink = prodetail.sizeChartLink;
+  }
+
+  extrainfohtml() {
+    return ` 
+    <a href="${this.sizeChartLink}" target="blank" >Size chart</a>
+    `;
+  }
 }
 
 
@@ -700,6 +715,9 @@ export const product = [
     ]
   }
 ].map((pro_details) => {
+  if (pro_details.type == 'clothing') {
+    return new Clothing(pro_details);
+  }
   return new Product(pro_details);
 });
 
