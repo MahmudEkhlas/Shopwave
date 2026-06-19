@@ -1,11 +1,16 @@
 import { renderordersummary } from "../../script/checkout/ordersummary.js";
 import { cart, loadfromstorage } from "../../data/cart.js";
-
+import { loadproducts } from "../../data/products.js";
 
 describe('test suite: renderOrderSummary', () => {
     const prodId1 = "e43638ce-6aa0-4b85-b27f-e1d07eb678c6";
     const prodId2 = "15b6fc6f-327a-4ec4-896f-486349e85a3d";
     //runs the lines of code everytime before the starting of each test case
+    beforeAll((done) => {
+        loadproducts(() => {
+            done();
+        });
+    });
     beforeEach(() => {
         spyOn(localStorage, 'setItem');
         document.querySelector('.js-test-container').innerHTML = `
