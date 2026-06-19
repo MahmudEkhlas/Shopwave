@@ -22,7 +22,7 @@ class Product {
     this.image = details.image;
     this.name = details.name;
     this.rating = details.rating;
-    this.price = details.price;
+    this.price = details.priceCents;
   }
 
   getstars() {
@@ -55,10 +55,28 @@ class Clothing extends Product {
 
 
 
-// const date = new Date();
+// loading the products using backend url rather than the traditional array
+export let product = [];
+
+export function loadproducts(fun) {
+  const xhr = new XMLHttpRequest();
+  xhr.addEventListener('load', () => {
+    product = JSON.parse(xhr.response).map((pro_details) => {
+      if (pro_details.type == 'clothing') {
+        return new Clothing(pro_details);
+      }
+      return new Product(pro_details);
+    });
+    fun();
+  });
+  xhr.open('GET', 'https://supersimplebackend.dev/products');
+  xhr.send();
+}
 
 
 
+
+/*
 //converting the older cart into the new class based objects of array
 export const product = [
   {
@@ -725,4 +743,4 @@ export const product = [
   }
   return new Product(pro_details);
 });
-
+*/

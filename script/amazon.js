@@ -1,10 +1,14 @@
 import { cart, add_to_cart } from "../data/cart.js";
-import { product } from "../data/products.js"
+import { product, loadproducts } from "../data/products.js"
 import { format_currency } from "./utils/money.js";
-let prodhtml = '';
 
-product.forEach((prod) => {
-  prodhtml += `
+
+loadproducts(renderproductsGrid);
+
+function renderproductsGrid() {
+  let prodhtml = '';
+  product.forEach((prod) => {
+    prodhtml += `
     <div class="product-container">
           <div class="product-image-container">
             <img class="product-image"
@@ -57,48 +61,50 @@ product.forEach((prod) => {
           </button>
         </div>
     `;
-});
-
-document.querySelector('.js-products-grid').innerHTML = prodhtml;
-
-//function for the updating total cart quantity in the front page
-function update_cart() {
-  let total_quantity = 0;
-
-  cart.forEach((item) => {
-    total_quantity += item.quantity;
   });
-  document.querySelector('.js-cart-quantity').innerHTML = total_quantity;
-}
 
+  document.querySelector('.js-products-grid').innerHTML = prodhtml;
 
+  //function for the updating total cart quantity in the front page
+  function update_cart() {
+    let total_quantity = 0;
 
-document.querySelectorAll('.js-add-to-cart').forEach((button) => {
-  button.addEventListener('click', () => {
-    const pro_id = button.dataset.product_id;
-    const quantity_select = document.querySelector(`.js-quantity-selector-${pro_id}`);
-    const val = Number(quantity_select.value);
-    add_to_cart(pro_id, val);
-    update_cart();
-    generateAddedhtml(pro_id);
-  });
-});
-
-
-// for  'added' to be visible  on the page after clicking adda to cart button
-let time_id={};
-function generateAddedhtml(pro_id) {
-  
-  const added_to = document.querySelector(`.js-added-to-cart-${pro_id}`);
-
-  added_to.classList.add('added-to-cart-visible');
-
-  if (time_id[pro_id]) {
-    clearTimeout(time_id[pro_id]);
+    cart.forEach((item) => {
+      total_quantity += item.quantity;
+    });
+    document.querySelector('.js-cart-quantity').innerHTML = total_quantity;
   }
-  const timeID = setTimeout(() => {
-    added_to.classList.remove('added-to-cart-visible');
-  }, 2000);
-  time_id[pro_id] = timeID;
 
+
+
+  document.querySelectorAll('.js-add-to-cart').forEach((button) => {
+    button.addEventListener('click', () => {
+      const pro_id = button.dataset.product_id;
+      const quantity_select = document.querySelector(`.js-quantity-selector-${pro_id}`);
+      const val = Number(quantity_select.value);
+      add_to_cart(pro_id, val);
+      update_cart();
+      generateAddedhtml(pro_id);
+    });
+  });
+
+
+  // for  'added' to be visible  on the page after clicking adda to cart button
+  let time_id = {};
+  function generateAddedhtml(pro_id) {
+
+    const added_to = document.querySelector(`.js-added-to-cart-${pro_id}`);
+
+    added_to.classList.add('added-to-cart-visible');
+
+    if (time_id[pro_id]) {
+      clearTimeout(time_id[pro_id]);
+    }
+    const timeID = setTimeout(() => {
+      added_to.classList.remove('added-to-cart-visible');
+    }, 2000);
+    time_id[pro_id] = timeID;
+
+  }
 }
+
