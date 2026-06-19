@@ -54,6 +54,11 @@ class Clothing extends Product {
 }
 
 
+
+// const date = new Date();
+
+
+
 //converting the older cart into the new class based objects of array
 export const product = [
   {
