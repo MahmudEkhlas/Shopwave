@@ -58,6 +58,22 @@ class Clothing extends Product {
 // loading the products using backend url rather than the traditional array
 export let product = [];
 
+export function loadproductsfetch() {
+  const promise =
+    fetch('https://supersimplebackend.dev/products').then((response) => {
+      return response.json();
+    }).then((prodata) => {
+      product = prodata.map((pro_details) => {
+        if (pro_details.type == 'clothing') {
+          return new Clothing(pro_details);
+        }
+        return new Product(pro_details);
+      });
+    });
+    return promise;
+}
+/*
+It is other way to call http request using calback function and xml object
 export function loadproducts(fun) {
   const xhr = new XMLHttpRequest();
   xhr.addEventListener('load', () => {
@@ -71,7 +87,7 @@ export function loadproducts(fun) {
   });
   xhr.open('GET', 'https://supersimplebackend.dev/products');
   xhr.send();
-}
+}*/
 
 
 
