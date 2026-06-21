@@ -14,13 +14,21 @@ import { loadCart } from "../data/cart.js";
 
 
 async function loadpage() {
-    await loadproductsfetch();
+    try {
+        await loadproductsfetch();
 
-    await new Promise((resolve) => {
-        loadCart(() => {
-            resolve();
+        await new Promise((resolve,reject) => {
+            //throw works till this level
+            loadCart(() => {
+                resolve();
+                //throw keyword doesn't work inside the function that will take place in the future or the function that needed to be loaded in the future
+                reject('error inside the function that has to run in future');
+            });
         });
-    });
+    } catch (error){
+        console.log(error);
+        
+    }
     renderordersummary();
     renderpaymentsummary();
     renderCheckoutHeader();
