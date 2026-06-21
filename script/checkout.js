@@ -11,7 +11,25 @@ import { loadCart } from "../data/cart.js";
 //     renderCheckoutHeader();
 // });
 
-Promise.all([
+
+
+async function loadpage() {
+    await loadproductsfetch();
+
+    await new Promise((resolve) => {
+        loadCart(() => {
+            resolve();
+        });
+    });
+    renderordersummary();
+    renderpaymentsummary();
+    renderCheckoutHeader();
+}
+
+loadpage();
+
+
+/*Promise.all([
     loadproductsfetch(),
     new Promise((resolve) => {
         loadCart(() => {
@@ -22,7 +40,7 @@ Promise.all([
     renderordersummary();
     renderpaymentsummary();
     renderCheckoutHeader();
-});
+});*/
 
 /*
 new Promise((resolve) => {
