@@ -70,7 +70,7 @@ export function loadproductsfetch() {
         return new Product(pro_details);
       });
     }).catch((error)=>{
-      console.log('An Error ha soccured');
+      console.log('An Error has occured');
     });
     return promise;
 }
