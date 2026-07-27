@@ -25,3 +25,4 @@ xhr2.addEventListener('load', () => {
 
 xhr2.open('GET', 'https://supersimplebackend.dev/products/first');
 xhr2.send();
+//smaple push
