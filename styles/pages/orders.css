@@ -25,6 +25,26 @@
   row-gap: 50px;
 }
 
+.empty-orders {
+  border: 1px solid rgb(213, 217, 217);
+  border-radius: 8px;
+  padding: 28px;
+}
+
+.empty-orders-title {
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.empty-orders-message {
+  margin-bottom: 18px;
+}
+
+.empty-orders-button {
+  padding: 8px 36px;
+}
+
 .order-header {
   background-color: rgb(240, 242, 242);
   border: 1px solid rgb(213, 217, 217);

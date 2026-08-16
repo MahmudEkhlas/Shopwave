@@ -64,12 +64,16 @@ export function renderpaymentsummary() {
         },
         //the actual data that will be sent to the backend
         body: JSON.stringify({
-          cart: cart
+          cart: cart.map(item => ({
+            productId: item.productid,
+            quantity: item.quantity,
+            deliveryOptionId: item.deliveryOptionID
+          }))
         })
       });
       const order = await response.json();
       addorder(order);
-    } catch(error) {
+    } catch (error) {
       console.log('Unexpected error');
     }
 
